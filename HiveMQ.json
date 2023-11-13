@@ -1,0 +1,154 @@
+[
+    {
+        "id": "b5c69c5a541862bc",
+        "type": "tab",
+        "label": "HiveMQ",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4c08ab748b79c38b",
+        "type": "ncd-gateway-node",
+        "z": "b5c69c5a541862bc",
+        "name": "",
+        "connection": "3a158777559a1790",
+        "unknown_devices": 0,
+        "outputs": 1,
+        "x": 130,
+        "y": 240,
+        "wires": [
+            [
+                "45414a43b59d7e97"
+            ]
+        ]
+    },
+    {
+        "id": "343ffd6ad30a0bb2",
+        "type": "mqtt out",
+        "z": "b5c69c5a541862bc",
+        "name": "HiveMQ",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "662312ba505cbca9",
+        "x": 820,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "41a9c4cf4111e71b",
+        "type": "change",
+        "z": "b5c69c5a541862bc",
+        "name": "Set Publish Topic",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "\"ncd/\" & msg.payload.addr",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "343ffd6ad30a0bb2",
+                "b8b14b5e42388ed5"
+            ]
+        ]
+    },
+    {
+        "id": "b8b14b5e42388ed5",
+        "type": "debug",
+        "z": "b5c69c5a541862bc",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "45414a43b59d7e97",
+        "type": "switch",
+        "z": "b5c69c5a541862bc",
+        "name": "Check MSG Type",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "sensor_data",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 240,
+        "wires": [
+            [
+                "41a9c4cf4111e71b"
+            ]
+        ]
+    },
+    {
+        "id": "3a158777559a1790",
+        "type": "ncd-gateway-config",
+        "name": "",
+        "comm_type": "serial",
+        "ip_address": "",
+        "tcp_port": "2101",
+        "port": "/dev/ttymxc2",
+        "baudRate": "115200",
+        "pan_id": "7FFF",
+        "rssi": true
+    },
+    {
+        "id": "662312ba505cbca9",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "",
+        "port": "8883",
+        "tls": "",
+        "clientid": "ncd-c3c2",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
